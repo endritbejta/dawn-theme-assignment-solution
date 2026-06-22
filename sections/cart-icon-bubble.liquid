@@ -1,0 +1,52 @@
+{%- liquid
+  assign bundle_count = 0
+  assign normal_count = 0
+  assign counted_bundles = ""
+
+  for item in cart.items
+    assign is_bundle_child = false
+    assign is_bundle_parent = false
+    assign item_bundle_id = ""
+
+    for prop in item.properties
+      if prop.first == "_bundle_child" and prop.last == "true"
+        assign is_bundle_child = true
+      endif
+      if prop.first == "_bundle_parent" and prop.last == "true"
+        assign is_bundle_parent = true
+      endif
+      if prop.first == "_bundle_id"
+        assign item_bundle_id = prop.last
+      endif
+    endfor
+
+    if is_bundle_parent
+      unless counted_bundles contains item_bundle_id
+        assign bundle_count = bundle_count | plus: 1
+        assign counted_bundles = counted_bundles | append: item_bundle_id | append: ","
+      endunless
+    elsif is_bundle_child
+      continue
+    else
+      assign normal_count = normal_count | plus: item.quantity
+    endif
+  endfor
+
+  assign display_count = normal_count | plus: bundle_count
+-%}
+
+{% if cart == empty %}
+  <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+{% else %}
+  <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+{% endif %}
+
+<span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+{%- if cart != empty -%}
+  <div class="cart-count-bubble">
+    {%- if display_count < 100 -%}
+      <span aria-hidden="true">{{ display_count }}</span>
+    {%- endif -%}
+    <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: display_count }}</span>
+  </div>
+{%- endif -%}
