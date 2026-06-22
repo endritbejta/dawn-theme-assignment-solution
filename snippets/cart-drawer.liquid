@@ -257,13 +257,18 @@
                                             height="50">
                                         {% endif %}
                                         <div class="bundle-group__child-info">
-                                          <p class="bundle-group__child-title">{{ child.product.title | escape }}</p>
+                                          <p class="bundle-group__child-title">
+                                            {{ child.product.title | escape }}
+                                            {%- if child.quantity > 1 -%}
+                                              <span class="bundle-group__child-qty">&times;{{ child.quantity }}</span>
+                                            {%- endif -%}
+                                          </p>
                                           {%- unless child.variant.title == "Default Title" -%}
                                             <p class="bundle-group__child-variant">{{ child.variant.title }}</p>
                                           {%- endunless -%}
                                         </div>
                                         <div class="bundle-group__child-price">
-                                          <span>{{ child.final_price | money }}</span>
+                                          <span>{{ child.final_line_price | money }}</span>
                                           {%- if child.original_price > child.final_price -%}
                                             <s class="bundle-group__child-compare">{{ child.original_price | money }}</s>
                                           {%- endif -%}
@@ -831,6 +836,11 @@
     }
     .bundle-group__child-title {
       font-weight: 600;
+    }
+    .bundle-group__child-qty {
+      color: #666;
+      font-weight: 400;
+      margin-left: 2px;
     }
     .bundle-group__child-variant {
       color: #777;
