@@ -93,7 +93,7 @@
           "sunglasses"
         ],
         "bundle": "custom-bundle",
-        "mobile_auto_open": false
+        "mobile_auto_open": true
       }
     }
   },
