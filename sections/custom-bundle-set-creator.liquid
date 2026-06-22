@@ -1335,7 +1335,8 @@ div.bundle-sheet-handle__bar {
               type="button"
               class="bundle-checkout-button"
               id="bundle-add-all-{{ section.id }}"
-              data-bundle-variant-id="{{ section.settings.bundle.selected_or_first_available_variant.id }}"
+              {% comment %} Data variant id fallback just in case we dont select the custom bundle via customizer (change id per your custom bundle product variant id) {% endcomment %}
+              data-bundle-variant-id="{% if section.settings.bundle.selected_or_first_available_variant.id %}{{ section.settings.bundle.selected_or_first_available_variant.id }}{% else %}51825301651754{% endif %}"
               disabled>
               <svg
                 viewBox="0 0 24 24"
