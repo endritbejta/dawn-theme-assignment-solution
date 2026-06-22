@@ -89,4 +89,3 @@ Bundle items are linked via `_bundle_id`, `_bundle_parent`/`_bundle_child`, and 
 2. **Items are separate line items at checkout** — bundle grouping is a presentation layer in the cart only
 3. **Built for Dawn theme** — other themes may need CSS/markup adjustments
 4. **Placeholder product must stay on Online Store channel** — removing it causes a JS error
-5. **Max 6 products per bundle** (configurable in schema)
