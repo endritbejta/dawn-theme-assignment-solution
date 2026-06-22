@@ -143,7 +143,7 @@
                           endfor
 
                           if child_is_child and child_bundle_id == bundle_id
-                            assign bundle_subtotal = bundle_subtotal | plus: child.final_line_price
+                            assign bundle_subtotal = bundle_subtotal | plus: child.original_line_price
                             assign bundle_child_count = bundle_child_count | plus: child.quantity
                           endif
                         endfor
@@ -238,10 +238,7 @@
                                       {%- endunless -%}
                                     </div>
                                     <div class="bundle-group__child-price">
-                                      <span>{{ child.final_line_price | money }}</span>
-                                      {%- if child.original_price > child.final_price -%}
-                                        <s class="bundle-group__child-compare">{{ child.original_price | money }}</s>
-                                      {%- endif -%}
+                                      <span>{{ child.original_line_price | money }}</span>
                                     </div>
                                   </div>
                                 {%- endif -%}
