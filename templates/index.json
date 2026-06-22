@@ -76,10 +76,30 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "custom_bundle_set_creator_bDQdKU": {
+      "type": "custom-bundle-set-creator",
+      "name": "Bundle set creator",
+      "settings": {
+        "title": "Complete your bundle",
+        "subheading": "Choose your favorite products and add them all to cart with one click.",
+        "allow_category": true,
+        "product_list": [
+          "duffle-bag",
+          "everyday-backpack",
+          "insulated-bottle-750ml",
+          "organic-cotton-cap",
+          "performance-socks",
+          "sunglasses"
+        ],
+        "bundle": "custom-bundle",
+        "mobile_auto_open": false
+      }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "custom_bundle_set_creator_bDQdKU"
   ]
 }
