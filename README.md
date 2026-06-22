@@ -2,6 +2,11 @@
 
 A self-contained Shopify section that lets customers build a product bundle from a curated list, preview their selection with tiered discounts, and add the entire bundle to the cart in one click.
 
+## Live Demo
+
+**URL:** [endrit-flower-shop.myshopify.com](https://endrit-flower-shop.myshopify.com/)
+**Password:** `endrit`
+
 ---
 
 ## Screenshots
