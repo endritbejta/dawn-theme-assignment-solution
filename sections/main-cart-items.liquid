@@ -155,6 +155,9 @@
                       <tr id="CartItem-{{ item.index | plus: 1 }}" class="cart-item bundle-group-row">
                         <td colspan="5" class="bundle-group-cell">
                           <div class="bundle-group" data-bundle-id="{{ bundle_id }}">
+                            <div class="bundle-group__loading">
+                              {%- render 'loading-spinner' -%}
+                            </div>
                             <div class="bundle-group__header">
                               <div class="bundle-group__header-left">
                                 {% if item.image %}
@@ -781,6 +784,34 @@
   .bundle-group__remove:hover {
     color: #000;
   }
+
+  .bundle-group {
+    position: relative;
+  }
+  .bundle-group .loading__spinner {
+    position: absolute;
+    top: 50%;
+    left: 50% !important;
+    padding: 0 !important;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    right: unset !important;
+  }
+  .bundle-group__loading {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 5;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+  .bundle-group.is-removing .bundle-group__loading {
+    display: flex;
+  }
 </style>
 
 <script>
@@ -806,6 +837,11 @@
         e.stopPropagation();
         const bundleId = removeBtn.dataset.bundleId;
         const rootUrl = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || "/";
+        const group = removeBtn.closest(".bundle-group");
+        const loadingSpinner = group ? group.querySelector(".loading__spinner") : null;
+
+        if (group) group.classList.add("is-removing");
+        if (loadingSpinner) loadingSpinner.classList.remove("hidden");
 
         fetch(rootUrl + "cart.js")
           .then((r) => r.json())
