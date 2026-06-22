@@ -64,6 +64,8 @@ These discounts are **automatic** — they apply at checkout without a coupon co
 | `custom-bundle-set-creator.liquid` | `sections/` | The main bundle builder section — product grid, sidebar cart, discount tiers, and add-to-cart logic |
 | `cart-drawer.liquid` | `snippets/` | Modified cart drawer that groups bundle items under a collapsible parent card |
 | `main-cart-items.liquid` | `sections/` | Modified cart page with the same bundle grouping as the cart drawer |
+| `header.liquid` | `sections/` | Modified header to use bundle-aware cart count (each bundle counts as 1 item) |
+| `cart-icon-bubble.liquid` | `sections/` | Modified cart icon bubble to count bundle items as a single unit instead of individual products |
 
 ---
 
