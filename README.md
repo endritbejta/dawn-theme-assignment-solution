@@ -12,7 +12,9 @@ Search for "Bundle set creator" in the theme customizer and add it to any page. 
 ![Adding the section](screenshots/Adding%20the%20section.png)
 
 ### 2. Configuring the Section
-Assign products, set the bundle placeholder product, enable category filtering, and configure mobile settings — all from the customizer sidebar.
+Assign products, set the bundle placeholder product, enable category filtering, and configure mobile settings — all from the customizer sidebar. The section settings panel includes text settings, product selection, the bundle placeholder product picker, and mobile behavior options.
+
+![Section settings](screenshots/Section%20settings.png)
 
 ![Interacting with section](screenshots/Interacting%20with%20section.png)
 
@@ -32,14 +34,21 @@ Clicking the bundle card expands it to show individual child products, variant i
 ![Custom bundle cart item opened](screenshots/Custom%20bundle%20cart%20item%20opened.png)
 
 ### 6. Removing a Bundle
-Clicking "Remove bundle" shows a loading spinner while all bundle items (parent + children) are removed from the cart in one request.
-
-![Removing bundle from cart](screenshots/Removing%20bundle%20from%20cart.png)
-
-### 7. After Bundle Removal
-The bundle is fully removed. Non-bundle items remain in the cart unaffected. If the cart becomes empty, the drawer closes automatically.
+Clicking "Remove bundle" shows a loading spinner while all bundle items (parent + children) are removed from the cart in one request. Non-bundle items remain unaffected. If the cart becomes empty, the drawer closes automatically.
 
 ![Removing from cart](screenshots/Removing%20from%20cart.png)
+
+### 7. Shopify Automatic Discounts
+The bundle discount is applied at checkout using **Shopify's built-in automatic discounts** — no scripts or third-party apps required. Two automatic discounts are configured in Shopify Admin to match the bundle tiers:
+
+- **10% OFF** — "Amount off products", 10% off all products, minimum quantity of 3
+- **15% OFF** — "Amount off products", 15% off all products, minimum quantity of 5
+
+These discounts are **automatic** — they apply at checkout without a coupon code. When a customer adds a bundle with 3+ items, Shopify automatically applies the best matching discount. The discounts stack with the visual discount shown in the bundle builder, ensuring the price the customer sees matches what they pay.
+
+![Discounts](screenshots/Discounts.png)
+
+> **Note:** The discount percentages displayed in the bundle builder sidebar are a visual preview. The actual price reduction happens at checkout via these automatic discounts. Make sure the Shopify discount thresholds match the `DISCOUNT_TIERS` array in the section's JavaScript.
 
 ---
 
@@ -236,7 +245,7 @@ Once the new image loads, the spinner disappears and the image returns to full o
 
 ## Limitations
 
-1. **Discount is visual only** — The discount percentages shown in the bundle builder and cart grouping are for display purposes. To actually apply the discount at checkout, you need to create a matching **Shopify automatic discount** (e.g., "10% off when buying 3+ items") or use **Shopify Scripts** (Plus plans only). The `_bundle_discount` property is available on each line item for reference.
+1. **Discount requires matching Shopify automatic discounts** — The bundle builder displays discount percentages in the UI, but the actual price reduction at checkout is handled by Shopify automatic discounts configured in Admin (see Screenshots, step 7). If the automatic discounts are removed or their thresholds don't match the `DISCOUNT_TIERS` array, the customer will see a discount preview but not receive it at checkout.
 
 2. **Individual item editing at checkout** — Shopify's checkout shows all line items individually. Customers can technically modify quantities of individual bundle items at checkout. The bundle grouping is a presentation layer in the cart only.
 
